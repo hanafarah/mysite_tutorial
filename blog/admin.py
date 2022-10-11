@@ -1,5 +1,6 @@
 from django.contrib import admin
 from . import models
+# from . models import Post
 
 
 class PostAdmin(admin.ModelAdmin):
