@@ -1,9 +1,6 @@
 from django.contrib import admin
 from . import models
 
-# Register the `Post` model
-admin.site.register(models.Post)
-
 
 class PostAdmin(admin.ModelAdmin):
     list_display = (
@@ -15,4 +12,5 @@ class PostAdmin(admin.ModelAdmin):
     )
 
 
-admin.site.register(models.Post, PostAdmin)
+# Register the `Post` model
+admin.site.register(models.Post)
