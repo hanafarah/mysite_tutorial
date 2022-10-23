@@ -9,13 +9,10 @@ class PostAdmin(admin.ModelAdmin):
         'created',
         'updated',
 
-
     )
 
+    search_fields = ['title']
 
-search_fields = (
-    'title',
-)
 
 # Register the `Post` model
 admin.site.register(models.Post, PostAdmin)
