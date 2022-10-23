@@ -10,6 +10,7 @@ class PostAdmin(admin.ModelAdmin):
         'created',
         'updated',
         'author',
+        'slug',
 
     ]
 
@@ -17,11 +18,16 @@ class PostAdmin(admin.ModelAdmin):
         'title',
         'author__username',
         'author__first_name',
-        'author__last_name'
-
+        'author__last_name',
 
 
     ]
+
+    list_filter = [
+        'status',
+    ]
+
+    prepopulated_fields = {'slug': ('title',)}
 
 
 # Register the `Post` model
