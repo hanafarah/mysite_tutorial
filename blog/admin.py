@@ -4,14 +4,24 @@ from . import models
 
 
 class PostAdmin(admin.ModelAdmin):
-    list_display = (
+    list_display = [
+
         'title',
         'created',
         'updated',
+        'author',
 
-    )
+    ]
 
-    search_fields = ['title']
+    search_fields = [
+        'title',
+        'author__username',
+        'author__first_name',
+        'author__last_name'
+
+
+
+    ]
 
 
 # Register the `Post` model
