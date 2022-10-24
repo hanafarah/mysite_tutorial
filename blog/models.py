@@ -4,12 +4,12 @@ from django.db import models
 # Create your models here.
 
 
-class PostQuerySet(models.QuerySet):
-    def published(self):
-        return self.filter(status=self.model.PUBLISHED)
+# class PostQuerySet(models.QuerySet):
+#     def published(self):
+#         return self.filter(status=self.model.PUBLISHED)
 
-    def drafts(self):
-        return self.filter(status=self.model.DRAFT)
+#     def drafts(self):
+#         return self.filter(status=self.model.DRAFT)
 
 
 class Topic(models.Model):
@@ -80,4 +80,4 @@ class Post(models.Model):
     def __str__(self):
         return self.title
 
-    objects = PostQuerySet.as_manager()
+    # objects = PostQuerySet.as_manager()
