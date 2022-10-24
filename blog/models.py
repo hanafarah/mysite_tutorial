@@ -39,11 +39,31 @@ class Post(models.Model):
         blank=True,
         help_text='The date & time this article was published'
     )
+
     created = models.DateTimeField(auto_now_add=True)  # Sets on create
     updated = models.DateTimeField(auto_now=True)  # Updates on each save
+
+    topics = models.ManyToManyField(
+        topic,
+        related_name='blog_posts'
+    )
 
     class Meta:
         ordering = ['-created']
 
     def __str__(self):
         return self.title
+
+
+class Topic(models.Model):
+    name = models.CharField(
+        max_length=50,
+        unique=True  # No duplicates!
+    )
+    slug = models.SlugField(unique=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ['name']
