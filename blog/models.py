@@ -4,6 +4,20 @@ from django.db import models
 # Create your models here.
 
 
+class Topic(models.Model):
+    name = models.CharField(
+        max_length=50,
+        unique=True  # No duplicates!
+    )
+    slug = models.SlugField(unique=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        ordering = ['name']
+
+
 class Post(models.Model):
     """
     Represents a blog post
@@ -20,6 +34,11 @@ class Post(models.Model):
         null=False,
         unique_for_date='published',
 
+    )
+
+    topics = models.ManyToManyField(
+        Topic,
+        related_name='blog_posts'
     )
     author = models.ForeignKey(
         settings.AUTH_USER_MODEL,  # The Django auth user model
@@ -39,31 +58,16 @@ class Post(models.Model):
         blank=True,
         help_text='The date & time this article was published'
     )
+    topics = models.ManyToManyField(
+        Topic,
+        related_name='blog_posts'
+    )
 
     created = models.DateTimeField(auto_now_add=True)  # Sets on create
     updated = models.DateTimeField(auto_now=True)  # Updates on each save
-
-    topics = models.ManyToManyField(
-        topic,
-        related_name='blog_posts'
-    )
 
     class Meta:
         ordering = ['-created']
 
     def __str__(self):
         return self.title
-
-
-class Topic(models.Model):
-    name = models.CharField(
-        max_length=50,
-        unique=True  # No duplicates!
-    )
-    slug = models.SlugField(unique=True)
-
-    def __str__(self):
-        return self.name
-
-    class Meta:
-        ordering = ['name']

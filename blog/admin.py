@@ -25,6 +25,7 @@ class PostAdmin(admin.ModelAdmin):
 
     list_filter = [
         'status',
+        'topics'
     ]
 
     prepopulated_fields = {'slug': ('title',)}
